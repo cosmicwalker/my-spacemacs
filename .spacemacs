@@ -17,41 +17,35 @@
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
-     semantic
-     c-c++
-     emacs-lisp
-     ;; go
-     ;; rust
-     markdown
-     ;; haskell
-     ;; python
-     ;; clojure
-     git
-     org
-     ;; emoji
-     colors
-     search-engine
-     syntax-checking
-     version-control
-
-     (shell :variables
-            shell-default-shell 'eshell
-            shell-default-height 30
-            shell-default-position 'bottom)
-
      (auto-completion :variables
                       auto-completion-return-key-behavior 'nil
                       auto-completion-tab-key-behavior 'complete
                       auto-completion-complete-with-key-sequence nil
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-sort-by-usage t)
+	 semantic
      (c-c++ :variables
+     		c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-clang-support t)
-
+     emacs-lisp
+     markdown
+     ;; haskell
+     ;; python
+     ;; clojure
+     git
+     github
+     org
+     ;; emoji
      (colors :variables
              colors-enable-nyan-cat-progress-bar t)
-
+     search-engine
+     syntax-checking
+     version-control
+     latex
+     (shell :variables
+            shell-default-shell 'eshell
+            shell-default-height 50
+            shell-default-position 'bottom)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -72,6 +66,8 @@ before layers configuration."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
+   evil-escape-key-sequence "jj"
+   evil-escape-delay 0.2
    ;; Either `vim' or `emacs'. Evil is always enabled but if the variable
    ;; is `emacs' then the `holy-mode' is enabled at startup.
    dotspacemacs-editing-style 'vim
@@ -186,6 +182,7 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+
   (global-company-mode t)
 
   (setq ad-redefinition-action 'accept)
@@ -205,8 +202,40 @@ layers configuration."
   (push '(baidu
           :name "Baidu"
           :url "https://www.baidu.com/s?wd=%s")
-          search-engine-alist)
+        search-engine-alist)
+
+  (setq powerline-default-separator 'arrow)
+
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  
+  
+  (setq fci-rule-column 80)
+  (setq fci-rule-color "orange")
+  (setq fci-rule-width 2)
+  (add-hook 'after-change-major-mode-hook 'fci-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ahs-case-fold-search nil)
+ '(ahs-default-range (quote ahs-range-whole-buffer))
+ '(ahs-idle-interval 0.25)
+ '(ahs-idle-timer 0 t)
+ '(ahs-inhibit-face-list nil)
+ '(ring-bell-function (quote ignore) t)
+ '(safe-local-variable-values
+   (quote
+    ((company-clang-arguments "-IF:/OpenCV3/opencv_build_with_contrib/install/include")
+     (company-clang-arguments "-I$HOME/include/opencv/" "-I$HOME/include/opencv2/")))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
