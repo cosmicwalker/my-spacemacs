@@ -27,6 +27,7 @@
         yasnippet
         cc-mode
         ycmd
+        whitespace
         ))
 
 ;;configs for EVIL mode
@@ -635,3 +636,14 @@
   (setq ycmd-tag-files 'auto)
   (setq ycmd-request-message-level -1)
   (set-variable 'ycmd-server-command `("python" ,(expand-file-name "~/Github/ycmd/ycmd/__main__.py"))))
+
+(defun scloud/post-init-whitespace ()
+  (set-face-attribute 'whitespace-tab nil
+                      :background "#Adff2f"
+                      :foreground "#00a8a8"
+                      :weight 'bold)
+  (set-face-attribute 'whitespace-trailing nil
+                      :background "#e4eeff"
+                      :foreground "#183bc8"
+                      :weight 'normal)
+  (diminish 'whitespace-mode))
