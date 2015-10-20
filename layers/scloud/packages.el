@@ -26,6 +26,7 @@
         powerline
         yasnippet
         cc-mode
+        ycmd
         ))
 
 ;;configs for EVIL mode
@@ -629,3 +630,8 @@
                                           company-gtags :with company-yasnippet)
                                           company-files company-dabbrev ))
   )
+
+(defun scloud/post-init-ycmd ()
+  (setq ycmd-tag-files 'auto)
+  (setq ycmd-request-message-level -1)
+  (set-variable 'ycmd-server-command `("python" ,(expand-file-name "~/Github/ycmd/ycmd/__main__.py"))))
