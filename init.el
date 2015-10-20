@@ -116,7 +116,7 @@ values."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed.
-   dotspacemacs-startup-banner 'doge
+   dotspacemacs-startup-banner 'official
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects'.
    ;; (default '(recents projects))
@@ -125,14 +125,14 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(monokai
+                         spacemacs-dark
                          solarized-light
                          leuven
-                         ;; sanityinc-tomorrow-day
-                         ;; sanityinc-tomorrow-eighties
-                         ;; spacemacs-dark
-                         ;; spacemacs-light
-                         ;; solarized-dark
-                         ;; zenburn
+                         sanityinc-tomorrow-day
+                         sanityinc-tomorrow-eighties
+                         spacemacs-light
+                         solarized-dark
+                         zenburn
                          )
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t

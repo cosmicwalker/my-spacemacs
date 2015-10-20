@@ -2,8 +2,8 @@
 ;;
 ;; Copyright (c) 2015-2016 zilongshanren
 ;;
-;; Author: zilongshanren <guanghui8827@gmail.com>
-;; URL: https://github.com/zilongshanren/spacemacs-private
+;; Author: scloud <onecloud.shen@gmail.com>
+;; URL: https://github.com/cosmicwalker/my-spacemacs.git
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
@@ -23,6 +23,9 @@
         org
         swiper
         youdao-dictionary
+        powerline
+        yasnippet
+        cc-mode
         ))
 
 ;;configs for EVIL mode
@@ -590,3 +593,39 @@
 
 (defun scloud/post-init-youdao-dictionary ()
   (evil-leader/set-key "oy" 'youdao-dictionary-search-at-point+))
+
+(defun scloud/post-init-powerline ()
+  (setq powerline-default-separator 'arrow))
+
+(defun scloud/post-init-yasnippet ()
+  (progn
+    (setq-default yas-prompt-functions '(yas-ido-prompt yas-dropdown-prompt))
+    (mapc #'(lambda (hook) (remove-hook hook 'spacemacs/load-yasnippet)) '(prog-mode-hook
+                                                                           org-mode-hook
+                                                                           markdown-mode-hook))
+
+    (defun zilongshanren/load-yasnippet ()
+      (unless yas-global-mode
+        (progn
+          (yas-global-mode 1)
+          (setq my-snippet-dir (expand-file-name "~/.spacemacs.d/snippets"))
+          (setq yas-snippet-dirs  my-snippet-dir)
+          (yas-load-directory my-snippet-dir)
+          (setq yas-wrap-around-region t)))
+      (yas-minor-mode 1))
+
+    (spacemacs/add-to-hooks 'zilongshanren/load-yasnippet '(prog-mode-hook
+                                                            markdown-mode-hook
+                                                            org-mode-hook))
+    ))
+
+(defun scloud/post-init-cc-mode ()
+  ;; company backend should be grouped
+  ;(define-key c++-mode-map (kbd "s-.") 'company-ycmd)
+  (setq company-backends-c-mode-common '((company-c-headers
+                                          company-dabbrev-code
+                                          company-keywords
+                                          company-etags
+                                          company-gtags :with company-yasnippet)
+                                          company-files company-dabbrev ))
+  )
