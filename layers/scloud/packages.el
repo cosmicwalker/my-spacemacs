@@ -147,8 +147,8 @@
               ;(flycheck-package-setup)
               (setq flycheck-display-errors-function 'flycheck-display-error-messages)
               (setq flycheck-display-errors-delay 0.2)
-              (remove-hook 'c-mode-hook 'flycheck-mode)
-              (remove-hook 'c++-mode-hook 'flycheck-mode)
+              ;(remove-hook 'c-mode-hook 'flycheck-mode)
+              ;(remove-hook 'c++-mode-hook 'flycheck-mode)
               (spacemacs|evilify-map flycheck-error-list-mode-map
                 :mode flycheck-error-list-mode
                 :bindings
